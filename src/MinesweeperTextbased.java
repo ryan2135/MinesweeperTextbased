@@ -33,6 +33,10 @@ public class MinesweeperTextbased {
   public static void main (String[] args) {
     Character difficultyLevel = 'E';
     Difficulty cDifficulty;
+    MinesweeperBoard cMinesweeperBoard = new MinesweeperBoard ((short) 9,
+      (short) 9, (short) 9,
+      new Cell ((short) 0, "", "  ."), new Bomb ((short) 0, "", "  @"),
+      (long) 0);
     // boolean bHitBomb;
     short xCoord, yCoord;
 
@@ -49,6 +53,8 @@ public class MinesweeperTextbased {
     catch (IOException difficultyException) {
       System.out.println ("I/O error: " + difficultyException);
     }
+
+    cMinesweeperBoard.draw ();
   }
 /*
 
