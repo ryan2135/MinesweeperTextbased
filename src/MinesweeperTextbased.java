@@ -8,21 +8,17 @@ public class MinesweeperTextbased {
   public static final short ADDIONAL_BOMBS_PER_LEVEL = 3;
 
 
-  public static enum Difficulty {
-    EASY, MEDIUM, HARD
-  }
-
-  public static Difficulty checkDifficulty (Character difficulty) throws IOException {
-    Difficulty cDifficulty;
+  public static MinesweeperGame.Difficulty checkDifficulty (Character difficulty) throws IOException {
+    MinesweeperGame.Difficulty cDifficulty;
 
     if (difficulty == 'E') {
-      cDifficulty = Difficulty.EASY;
+      cDifficulty = MinesweeperGame.Difficulty.EASY;
     }
     else if (difficulty == 'M') {
-      cDifficulty = Difficulty.MEDIUM;
+      cDifficulty = MinesweeperGame.Difficulty.MEDIUM;
     }
     else if (difficulty == 'H') {
-      cDifficulty = Difficulty.HARD;
+      cDifficulty = MinesweeperGame.Difficulty.HARD;
     }
     else {
       throw new IOException ("Illegal Selection");
@@ -32,7 +28,7 @@ public class MinesweeperTextbased {
 
   public static void main (String[] args) {
     Character difficultyLevel = 'E';
-    Difficulty cDifficulty;
+    MinesweeperGame.Difficulty cDifficulty;
     MinesweeperBoard cMinesweeperBoard = new MinesweeperBoard ((short) 9,
       (short) 9, (short) 9,
       new Cell ((short) 0, "", "  ."), new Bomb ((short) 0, "", "  @"),

@@ -7,10 +7,10 @@ public class MinesweeperBoard extends Board2D {
                            Cell cCell, Bomb cBomb, long seed) {
     super (rows, columns, cCell);
     mNumBombs = numBombs;
+    addBombs (cBomb, seed);
   }
 
-  public void init (Cell cEmptyCell, Bomb cBombCell, long seed) {
-    init (cEmptyCell);
+  public void addBombs (Bomb cBomb, long seed) {
 
     Random random = new Random (seed);
     int count = 0;
@@ -21,7 +21,7 @@ public class MinesweeperBoard extends Board2D {
       randomX = random.nextInt (this.mColumns);
       randomY = random.nextInt (this.mRows);
       if (!(this.mcCells[randomX][randomY] instanceof Bomb)) {
-        this.mcCells[randomX][randomY] = new Bomb (cBombCell);
+        this.mcCells[randomX][randomY] = new Bomb (cBomb);
         ++count;
       }
     } while (count < mNumBombs);
@@ -33,38 +33,31 @@ public class MinesweeperBoard extends Board2D {
     // output X (column) numbers
     for (short x = 0; x < this.mColumns; x++) {
       // draw spaces before each number
-      for (short j = 0;
+      for (short space = 0;
            // subtracting off digits in number
-           j < this.mcCells[0][0].getContants ().length () - x / 10 - 1;
-           j++) {
+           space < this.mcCells[0][0].getContants ().length () - x / 10 - 1;
+           space++) {
         System.out.print (" ");
       }
-      System.out.print (x);
+      System.out.print (x + " ");
     }
     System.out.println ();
     System.out.println ();
 
-/*    for (int i = 0; i < mDimension; i++) {
-      for (int j = 0; j < mDimension; j++) {
-        System.out.format ("  " + maBoard[i][j]);
-
-        // Each cell is contained with a '|' except the final cell which
-        // shows the row number
-        if (j == mDimension - 1) {
-          System.out.format ("%6d ", i);
-        } else {
-          System.out.format ("|");
-        }
+    for (int x = 0; x < this.mRows; x++) {
+      for (int y = 0; y < this.mColumns; y++) {
+        this.mcCells[x][y].draw ();
+        System.out.print("|");
       }
+      System.out.format ("%4d ", x);
       System.out.println ();
 
       // Print out the dashes between each row of cell
-      if (i != mDimension - 1) {
-        for (int k = 0; k < numDashes; k++) {
+        for (int k = 0;
+             k < (this.mcCells[0][0].getContants ().length () + 1 ) * mColumns; k++) {
           System.out.format ("-");
         }
         System.out.println ();
       }
-    }*/
+    }
   }
-}
