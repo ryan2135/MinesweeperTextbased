@@ -7,8 +7,43 @@ public class MinesweeperTextbased {
   public static final short INITIAL_BOMBS = (short) Math.sqrt (NUM_COLS * NUM_ROWS);
   public static final short ADDIONAL_BOMBS_PER_LEVEL = 3;
 
+public static void draw (MinesweeperBoard cMinesweeperBoard) {
+  // output X (column) numbers
+  for (short x = 0; x < cMinesweeperBoard.mColumns; x++) {
+    // draw spaces before each number
+    for (short space = 0;
+      // subtracting off digits in number
+         space < cMinesweeperBoard.mcCells[0][0].getContants ().length () - x / 10 - 1;
+         space++) {
+      System.out.print (" ");
+    }
+    System.out.print (x + " ");
+  }
+  System.out.println ();
+  System.out.println ();
 
-  public static MinesweeperGame.Difficulty checkDifficulty (Character difficulty) throws IOException {
+  for (short x = 0; x < cMinesweeperBoard.mRows; x++) {
+    for (short y = 0; y < cMinesweeperBoard.mColumns; y++) {
+      //cMinesweeperBoard.mcCells[x][y].draw ();
+      System.out.print (cMinesweeperBoard.mcCells[x][y].getContants () +
+        "|");
+      //System.out.print("|");
+    }
+    System.out.format ("%4d ", x);
+    System.out.println ();
+
+    // Print out the dashes between each row of cell
+    for (short k = 0;
+         k < (cMinesweeperBoard.mcCells[0][0].getContants ().length () + 1 ) *
+           cMinesweeperBoard.getNumCols (); k++) {
+      System.out.format ("-");
+    }
+    System.out.println ();
+  }
+}
+
+  public static MinesweeperGame.Difficulty checkDifficulty
+    (Character difficulty) throws IOException {
     MinesweeperGame.Difficulty cDifficulty;
 
     if (difficulty == 'E') {
@@ -31,7 +66,7 @@ public class MinesweeperTextbased {
     MinesweeperGame.Difficulty cDifficulty;
     MinesweeperBoard cMinesweeperBoard = new MinesweeperBoard ((short) 9,
       (short) 9, (short) 9,
-      new Cell ((short) 0, "", "  ."), new Bomb ((short) 0, "", "  @"),
+      new MinesweeperCell ( "  ."), new Bomb ("  @"),
       (long) 0);
     // boolean bHitBomb;
     short xCoord, yCoord;
@@ -50,7 +85,8 @@ public class MinesweeperTextbased {
       System.out.println ("I/O error: " + difficultyException);
     }
 
-    cMinesweeperBoard.draw ();
+    // cMinesweeperBoard.draw ();
+    draw (cMinesweeperBoard);
   }
 /*
 

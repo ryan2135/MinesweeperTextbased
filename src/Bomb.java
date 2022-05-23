@@ -1,9 +1,14 @@
-public class Bomb extends Cell {
-  public Bomb (short id, String name, String contents) {
-    super (id, name, contents);
+public class Bomb extends MinesweeperCell {
+
+  public Bomb () {
+    super ();
+  }
+
+  public Bomb (String cContents) {
+    super (cContents);
   }
 
   public Bomb (Bomb cBomb) {
-    super (cBomb.mID, cBomb.mcName, cBomb.mcContents);
+    super (cBomb.mcContents);
   }
 }

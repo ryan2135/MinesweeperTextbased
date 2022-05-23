@@ -17,4 +17,16 @@ public class Board2D {
       }
     }
   }
+
+  public short getNumRows () {
+    return mRows;
+  }
+
+  public short getNumCols () {
+    return mColumns;
+  }
+
+  public Cell getCell (short row, short column) {
+    return new Cell (mcCells[row][column]);
+  }
 }

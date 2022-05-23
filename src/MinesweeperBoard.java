@@ -4,8 +4,10 @@ public class MinesweeperBoard extends Board2D {
   short mNumBombs;
 
   public MinesweeperBoard (short rows, short columns, short numBombs,
-                           Cell cCell, Bomb cBomb, long seed) {
-    super (rows, columns, cCell);
+                           MinesweeperCell cMinesweeperCell,
+                           Bomb cBomb,
+                           long seed) {
+    super (rows, columns, cMinesweeperCell);
     mNumBombs = numBombs;
     addBombs (cBomb, seed);
   }
@@ -27,7 +29,7 @@ public class MinesweeperBoard extends Board2D {
     } while (count < mNumBombs);
   }
 
-  public void draw () {
+  /*public void draw () {
     //int numDashes = (mDimension * 3) + (mDimension - 1);
 
     // output X (column) numbers
@@ -59,5 +61,5 @@ public class MinesweeperBoard extends Board2D {
         }
         System.out.println ();
       }
-    }
+    }*/
   }

@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="409a65f4-7b54-4b78-8ba2-a195767f2b7c" name="Changes" comment="Working on MinesweeperBoard especially draw to try and make it as generic as possible">
-      <change afterPath="$PROJECT_DIR$/src/MinesweeperGame.java" afterDir="false" />
+    <list default="true" id="409a65f4-7b54-4b78-8ba2-a195767f2b7c" name="Changes" comment="Outputted board and now working on the actual game play">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MinesweeperCell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MinesweeperBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinesweeperBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MinesweeperTextbased.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MinesweeperTextbased.java" afterDir="false" />
     </list>
@@ -35,7 +40,9 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "preferences.sourceCode"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
   <component name="RunManager">
@@ -68,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652996750712</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Outputted board and now working on the actual game play">
+      <created>1653081396703</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1653081396703</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -84,17 +98,22 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Working on MinesweeperBoard especially draw to try and make it as generic as possible" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working on MinesweeperBoard especially draw to try and make it as generic as possible" />
+    <MESSAGE value="Outputted board and now working on the actual game play" />
+    <option name="LAST_COMMIT_MESSAGE" value="Outputted board and now working on the actual game play" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/MinesweeperTextbased.java</url>
-          <line>52</line>
+          <line>87</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
