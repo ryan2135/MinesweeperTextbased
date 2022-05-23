@@ -2,10 +2,10 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MinesweeperTextbased {
-  public static final short NUM_ROWS = 9;
+/*  public static final short NUM_ROWS = 9;
   public static final short NUM_COLS = 9;
-  public static final short INITIAL_BOMBS = (short) Math.sqrt (NUM_COLS * NUM_ROWS);
-  public static final short ADDIONAL_BOMBS_PER_LEVEL = 3;
+
+  public static final short ADDIONAL_BOMBS_PER_LEVEL = 3;*/
 
 public static void draw (MinesweeperBoard cMinesweeperBoard) {
   // output X (column) numbers
@@ -63,11 +63,8 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
 
   public static void main (String[] args) {
     Character difficultyLevel = 'E';
-    MinesweeperGame.Difficulty cDifficulty;
-    MinesweeperBoard cMinesweeperBoard = new MinesweeperBoard ((short) 9,
-      (short) 9, (short) 9,
-      new MinesweeperCell ( "  ."), new Bomb ("  @"),
-      (long) 0);
+    MinesweeperGame.Difficulty cDifficulty = MinesweeperGame.Difficulty.EASY;
+
     // boolean bHitBomb;
     short xCoord, yCoord;
 
@@ -85,30 +82,37 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
       System.out.println ("I/O error: " + difficultyException);
     }
 
-    // cMinesweeperBoard.draw ();
+    MinesweeperGame cMineSweeperGame = new MinesweeperGame (cDifficulty,
+      MinesweeperGame.GameMode.DEBUG);
+
+    MinesweeperBoard cMinesweeperBoard =
+      new MinesweeperBoard (cMineSweeperGame.getNumRows (),
+        cMineSweeperGame.getNumCols (), cMineSweeperGame.getNumBombs (),
+      new MinesweeperCell ( "  ."), new Bomb ("  @"),
+      (long) 0);
     draw (cMinesweeperBoard);
   }
-/*
 
-            MineSweeper mMindSweeper = new MineSweeper (difficultyLevel, BOARD_SIZE);
 
-            do
-            {
-                System.out.println ();
-                mMindSweeper.printBoard ();
-                System.out.println ();
-                System.out.print ("Enter X and Y Coordinate: ");
-                xCoord = input.nextInt ();
-                yCoord = input.nextInt ();
-                bHitBomb = mMindSweeper.isBomb (xCoord, yCoord);
-                if (!bHitBomb)
-                {
-                    mMindSweeper.processBoard (xCoord, yCoord);
-                }
-                else
-                {
-                    System.out.println ("Boooom!!! You lose.");
-                }
-            } while (!bHitBomb);
-            input.close ();*/
+
+
+/*  do
+  {
+      System.out.println ();
+      mMindSweeper.printBoard ();
+      System.out.println ();
+      System.out.print ("Enter X and Y Coordinate: ");
+      xCoord = input.nextInt ();
+      yCoord = input.nextInt ();
+      bHitBomb = mMindSweeper.isBomb (xCoord, yCoord);
+      if (!bHitBomb)
+      {
+          mMindSweeper.processBoard (xCoord, yCoord);
+      }
+      else
+      {
+          System.out.println ("Boooom!!! You lose.");
+      }
+  } while (!bHitBomb);
+  input.close ();*/
   }
