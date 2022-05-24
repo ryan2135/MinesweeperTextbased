@@ -9,7 +9,7 @@ public class MinesweeperTextbased {
 
 public static void draw (MinesweeperBoard cMinesweeperBoard) {
   // output X (column) numbers
-  for (short x = 0; x < cMinesweeperBoard.mColumns; x++) {
+  for (short x = 0; x < cMinesweeperBoard.mRows; x++) {
     // draw spaces before each number
     for (short space = 0;
       // subtracting off digits in number
@@ -22,20 +22,20 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
   System.out.println ();
   System.out.println ();
 
-  for (short x = 0; x < cMinesweeperBoard.mRows; x++) {
-    for (short y = 0; y < cMinesweeperBoard.mColumns; y++) {
+  for (short y = 0; y < cMinesweeperBoard.mColumns; y++) {
+    for (short x = 0; x < cMinesweeperBoard.mRows; x++) {
       //cMinesweeperBoard.mcCells[x][y].draw ();
       System.out.print (cMinesweeperBoard.mcCells[x][y].getContants () +
         "|");
       //System.out.print("|");
     }
-    System.out.format ("%4d ", x);
+    System.out.format ("%4d ", y);
     System.out.println ();
 
     // Print out the dashes between each row of cell
     for (short k = 0;
          k < (cMinesweeperBoard.mcCells[0][0].getContants ().length () + 1 ) *
-           cMinesweeperBoard.getNumCols (); k++) {
+           cMinesweeperBoard.getNumRows (); k++) {
       System.out.format ("-");
     }
     System.out.println ();
@@ -96,20 +96,25 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
       draw (cMinesweeperBoard);
       System.out.println ();
       System.out.print ("Enter X and Y Coordinate: ");
-      // Error check ???
+      // User sees 0 1 2 3 ...
+      // Actual    9 8 7
+      // Visually rotating board 90 clockwise
       xCoord = input.nextShort ();
+      //xCoord = (short) (cMinesweeperBoard.getNumRows () - xCoord - 1);
       yCoord = input.nextShort ();
       bHitBomb = cMinesweeperBoard.isBomb (xCoord, yCoord);
       if (!bHitBomb)
       {
-        //cMinesweeperBoard.processBoard (xCoord, yCoord);
+        cMinesweeperBoard.update (xCoord, yCoord);
       }
       else
       {
         System.out.println ("Boooom!!! You lose.");
       }
-    } while (!bHitBomb);
+    } while (!bHitBomb  && !cMinesweeperBoard.isWon ());
 
-   input.close ();
+    System.out.println ("Congratulations. You win");
+
+    input.close ();
   }
 }

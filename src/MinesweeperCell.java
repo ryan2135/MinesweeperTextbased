@@ -10,6 +10,11 @@ public class MinesweeperCell extends Cell {
     mBombNeighbors = 0;
   }
 
+  public MinesweeperCell (String cContents, short adjacentBombs) {
+    mcContents = cContents;
+    mBombNeighbors = adjacentBombs;
+  }
+
   public MinesweeperCell (MinesweeperCell cMinesweeperCell) {
     mcContents = cMinesweeperCell.mcContents;
     mBombNeighbors = cMinesweeperCell.mBombNeighbors;
