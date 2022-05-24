@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class MinesweeperBoard extends Board2D {
   short mNumBombs;
+  short mNumRevealed;
 
   public MinesweeperBoard (short rows, short columns, short numBombs,
                            MinesweeperCell cMinesweeperCell,
@@ -9,6 +10,7 @@ public class MinesweeperBoard extends Board2D {
                            long seed) {
     super (rows, columns, cMinesweeperCell);
     mNumBombs = numBombs;
+    mNumRevealed = 0;
     addBombs (cBomb, seed);
   }
 
@@ -27,6 +29,18 @@ public class MinesweeperBoard extends Board2D {
         ++count;
       }
     } while (count < mNumBombs);
+  }
+
+  public boolean isBomb (short xCoord, short yCoord) {
+    return this.mcCells[yCoord][xCoord] instanceof Bomb;
+  }
+
+  public void update (short xCoord, short yCoord) {
+
+  }
+
+  public boolean isWon () {
+    return mNumRevealed == (getNumCols () * getNumRows () - mNumBombs);
   }
 
   /*public void draw () {

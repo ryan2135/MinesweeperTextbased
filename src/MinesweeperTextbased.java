@@ -64,7 +64,7 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
   public static void main (String[] args) {
     Character difficultyLevel = 'E';
     MinesweeperGame.Difficulty cDifficulty = MinesweeperGame.Difficulty.EASY;
-
+    boolean bHitBomb;
     // boolean bHitBomb;
     short xCoord, yCoord;
 
@@ -90,29 +90,26 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
         cMineSweeperGame.getNumCols (), cMineSweeperGame.getNumBombs (),
       new MinesweeperCell ( "  ."), new Bomb ("  @"),
       (long) 0);
-    draw (cMinesweeperBoard);
-  }
 
-
-
-
-/*  do
-  {
+    do {
       System.out.println ();
-      mMindSweeper.printBoard ();
+      draw (cMinesweeperBoard);
       System.out.println ();
       System.out.print ("Enter X and Y Coordinate: ");
-      xCoord = input.nextInt ();
-      yCoord = input.nextInt ();
-      bHitBomb = mMindSweeper.isBomb (xCoord, yCoord);
+      // Error check ???
+      xCoord = input.nextShort ();
+      yCoord = input.nextShort ();
+      bHitBomb = cMinesweeperBoard.isBomb (xCoord, yCoord);
       if (!bHitBomb)
       {
-          mMindSweeper.processBoard (xCoord, yCoord);
+        //cMinesweeperBoard.processBoard (xCoord, yCoord);
       }
       else
       {
-          System.out.println ("Boooom!!! You lose.");
+        System.out.println ("Boooom!!! You lose.");
       }
-  } while (!bHitBomb);
-  input.close ();*/
+    } while (!bHitBomb);
+
+   input.close ();
   }
+}
