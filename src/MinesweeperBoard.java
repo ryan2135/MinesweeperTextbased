@@ -10,7 +10,7 @@ public class MinesweeperBoard extends Board2D {
                            long seed) {
     super (rows, columns, cMinesweeperCell);
     mNumBombs = numBombs;
-    mNumRevealed = 0;
+    mNumRevealed = (short) (rows * columns - numBombs);
     addBombs (cBomb, seed);
   }
 
@@ -91,6 +91,7 @@ public class MinesweeperBoard extends Board2D {
           new MinesweeperCell ("  " + Short.toString (numAdjacentBombs),
           numAdjacentBombs);
         mcCells[xCoord][yCoord].select ();
+        --mNumRevealed;
       }
       // If there are no adjacent bombs then recursively check the cells
       // surrounding the coordinates
@@ -98,6 +99,7 @@ public class MinesweeperBoard extends Board2D {
       {
         mcCells[xCoord][yCoord] = new MinesweeperCell ("   ");
         mcCells[xCoord][yCoord].select ();
+        --mNumRevealed;
         update ((short) (xCoord - 1), (short) (yCoord - 1)); // upper-left
         update (xCoord, (short) (yCoord - 1)); // upper-middle
         update ((short) (xCoord + 1), (short) (yCoord - 1)); // upper-right
@@ -111,7 +113,7 @@ public class MinesweeperBoard extends Board2D {
   }
 
   public boolean isWon () {
-    return mNumRevealed == (getNumCols () * getNumRows () - mNumBombs);
+    return mNumRevealed <= 0;
   }
 
 }
