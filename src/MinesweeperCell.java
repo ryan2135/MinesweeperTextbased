@@ -3,6 +3,7 @@ public class MinesweeperCell extends Cell {
 
   public MinesweeperCell () {
     super ();
+    mBombNeighbors = 0;
   }
 
   public MinesweeperCell (String cContents) {

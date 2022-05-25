@@ -1,5 +1,6 @@
 public class MinesweeperGame {
   // The following information could be determined from the screen size
+  // say in Android or user entered
   // I'm just hard coding for now
   public static final short NUM_ROWS = 9;
   public static final short NUM_COLS = 9;
@@ -12,7 +13,7 @@ public class MinesweeperGame {
   }
 
   public static enum GameMode {
-    REAL, DEBUG
+    PLAY, LEARN
   }
 
   Difficulty mcGameDifficulty;

@@ -21,11 +21,10 @@ public class MinesweeperBoard extends Board2D {
     int randomX, randomY;
 
     do {
-      // horizontal direction is X (columns), vertical direction is Y (rows)
-      randomX = random.nextInt (this.mRows);
-      randomY = random.nextInt (this.mColumns);
-      if (!(this.mcCells[randomX][randomY] instanceof Bomb)) {
-        this.mcCells[randomX][randomY] = new Bomb (cBomb);
+      randomX = random.nextInt (mRows);
+      randomY = random.nextInt (mColumns);
+      if (!(mcCells[randomX][randomY] instanceof Bomb)) {
+        mcCells[randomX][randomY] = new Bomb (cBomb);
         ++count;
       }
     } while (count < mNumBombs);
@@ -36,12 +35,12 @@ public class MinesweeperBoard extends Board2D {
       this.mcCells[xCoord][yCoord] instanceof Bomb;
   }
 
-  public boolean isValidCoordinate (int xCoord, int yCoord)
+  public boolean isValidCoordinate (short xCoord, short yCoord)
   {
-    // (x, y) x goes left to right, y goes top to bottom
     return (mRows > xCoord && -1 < xCoord &&
       mColumns > yCoord && -1 < yCoord);
   }
+
   public short adjacentBombs (short xCoord, short yCoord) {
     short totalAdjacentBombs = 0;
     short one = 1;
@@ -78,7 +77,6 @@ public class MinesweeperBoard extends Board2D {
   public void update (short xCoord, short yCoord) {
     short numAdjacentBombs;
 
-    // Make sure that the coord is valid and not already visible, or a bomb
     if (isValidCoordinate (xCoord, yCoord) &&
       !mcCells[xCoord][yCoord].isSelected () && !isBomb (xCoord, yCoord))
     {

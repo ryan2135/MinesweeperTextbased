@@ -2,12 +2,20 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class MinesweeperTextbased {
-/*  public static final short NUM_ROWS = 9;
-  public static final short NUM_COLS = 9;
+  static final char EASY = 'E';
+  static final char MEDIUM = 'M';
+  static final char HARD = 'H';
+  static final char LEARN = 'L';
+  static final char PLAY = 'P';
+  static String EMPTY_CELL = "  .";
+  static String BOMB_CELL = "  @";
+  static String SELECTED_EMPTY_CELL = "   ";
+  static long RANDOM_SEED_VALUE = 0;
 
-  public static final short ADDIONAL_BOMBS_PER_LEVEL = 3;*/
+  public static void draw (MinesweeperBoard cMinesweeperBoard,
+                           MinesweeperGame.GameMode cGameMode) {
+    MinesweeperCell cMinesweeperCell = new MinesweeperCell (EMPTY_CELL);
 
-public static void draw (MinesweeperBoard cMinesweeperBoard) {
   // output X (column) numbers
   for (short x = 0; x < cMinesweeperBoard.mRows; x++) {
     // draw spaces before each number
@@ -24,10 +32,15 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
 
   for (short y = 0; y < cMinesweeperBoard.mColumns; y++) {
     for (short x = 0; x < cMinesweeperBoard.mRows; x++) {
-      //cMinesweeperBoard.mcCells[x][y].draw ();
-      System.out.print (cMinesweeperBoard.mcCells[x][y].getContants () +
-        "|");
-      //System.out.print("|");
+      if (cGameMode == MinesweeperGame.GameMode.PLAY &&
+        cMinesweeperBoard.mcCells[x][y] instanceof Bomb) {
+        System.out.print (cMinesweeperCell.getContants () +
+          "|");
+      }
+      else {
+        System.out.print (cMinesweeperBoard.mcCells[x][y].getContants () +
+          "|");
+      }
     }
     System.out.format ("%4d ", y);
     System.out.println ();
@@ -43,36 +56,64 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
 }
 
   public static MinesweeperGame.Difficulty checkDifficulty
-    (Character difficulty) throws IOException {
+    (char difficulty) throws IOException {
     MinesweeperGame.Difficulty cDifficulty;
 
-    if (difficulty == 'E') {
+    if (difficulty == EASY) {
       cDifficulty = MinesweeperGame.Difficulty.EASY;
     }
-    else if (difficulty == 'M') {
+    else if (difficulty == MEDIUM) {
       cDifficulty = MinesweeperGame.Difficulty.MEDIUM;
     }
-    else if (difficulty == 'H') {
+    else if (difficulty == HARD) {
       cDifficulty = MinesweeperGame.Difficulty.HARD;
     }
     else {
-      throw new IOException ("Illegal Selection");
+      throw new IOException ("Illegal Difficulty Level");
     }
     return cDifficulty;
   }
 
+  public static MinesweeperGame.GameMode checkGameMode
+    (char gameMode) throws IOException {
+    MinesweeperGame.GameMode cGameMode;
+
+    if (gameMode == LEARN) {
+      cGameMode = MinesweeperGame.GameMode.LEARN;
+    }
+    else if (gameMode == PLAY) {
+      cGameMode = MinesweeperGame.GameMode.PLAY;
+    }
+    else {
+      throw new IOException ("Illegal Game Mode");
+    }
+    return cGameMode;
+  }
+
   public static void main (String[] args) {
-    Character difficultyLevel = 'E';
+    char difficultyLevel = EASY;
+    char playLevel = LEARN;
     MinesweeperGame.Difficulty cDifficulty = MinesweeperGame.Difficulty.EASY;
+    MinesweeperGame.GameMode cGameMode = MinesweeperGame.GameMode.LEARN;
     boolean bHitBomb;
-    // boolean bHitBomb;
     short xCoord, yCoord;
 
     Scanner input = new Scanner (System.in);
 
     System.out.print ("***********\nMinesweeper\n***********\n\n");
-    System.out.print ("Enter difficulty level\n" +
-      "(E)ASY, M)EDIUM, H)ARD): ");
+
+    System.out.print ("Enter game mode\n" + "L)EARN, P)LAY: ");
+
+    try {
+      playLevel = input.next ().charAt (0);
+      cGameMode= checkGameMode (playLevel);
+    }
+    catch (IOException gameModeException) {
+      System.out.println ("I/O error: " + gameModeException);
+    }
+
+    System.out.print ("\nEnter difficulty level\n" +
+      "E)ASY, M)EDIUM, H)ARD): ");
 
     try {
       difficultyLevel = input.next ().charAt (0);
@@ -83,24 +124,20 @@ public static void draw (MinesweeperBoard cMinesweeperBoard) {
     }
 
     MinesweeperGame cMineSweeperGame = new MinesweeperGame (cDifficulty,
-      MinesweeperGame.GameMode.DEBUG);
+      cGameMode);
 
     MinesweeperBoard cMinesweeperBoard =
       new MinesweeperBoard (cMineSweeperGame.getNumRows (),
         cMineSweeperGame.getNumCols (), cMineSweeperGame.getNumBombs (),
-      new MinesweeperCell ( "  ."), new Bomb ("  @"),
-      (long) 0);
+      new MinesweeperCell ( EMPTY_CELL), new Bomb (BOMB_CELL),
+      RANDOM_SEED_VALUE);
 
     do {
       System.out.println ();
-      draw (cMinesweeperBoard);
+      draw (cMinesweeperBoard, cGameMode);
       System.out.println ();
       System.out.print ("Enter X and Y Coordinate: ");
-      // User sees 0 1 2 3 ...
-      // Actual    9 8 7
-      // Visually rotating board 90 clockwise
       xCoord = input.nextShort ();
-      //xCoord = (short) (cMinesweeperBoard.getNumRows () - xCoord - 1);
       yCoord = input.nextShort ();
       bHitBomb = cMinesweeperBoard.isBomb (xCoord, yCoord);
       if (!bHitBomb)

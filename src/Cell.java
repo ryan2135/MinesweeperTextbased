@@ -21,12 +21,8 @@ public class Cell {
     mcIsSelected = true;
   }
 
-  public Boolean isSelected () {
+  public boolean isSelected () {
     return mcIsSelected;
-  }
-
-  public void deSelect () {
-    mcIsSelected = false;
   }
 
   public String getContants () {
